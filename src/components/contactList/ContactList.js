@@ -48,13 +48,26 @@ export default class ContactList {
         this.renderGetContactsCount();
     }
 
+    async deleteOneById(id) {
+        // Supprimer de la DB
+        const resp = await DB.deleteOneById(id);
+        // Supprimer des contacts
+        this.contacts.splice(
+            this.contacts.findIndex((contact) => contact.id == id),
+            1
+        );
+        // Suprrimer du DOM dans initEvent
+        // relancer le renderGetContactsCount()
+        this.renderGetContactsCount();
+    }
+
     initEvents() {
         const inputFirstname = this.domElt.querySelector("#contact-firstname");
         const inputLastname = this.domElt.querySelector("#contact-lastname");
         const inputEmail = this.domElt.querySelector("#contact-email");
-        const btnContact = this.domElt.querySelector(".new-contact");
+        const btnAddContact = this.domElt.querySelector(".new-contact");
 
-        btnContact.addEventListener("click", async (e) => {
+        btnAddContact.addEventListener("click", async (e) => {
             const firstname = inputFirstname.value;
             const lastname = inputLastname.value;
             const email = inputEmail.value;

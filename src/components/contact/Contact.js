@@ -12,6 +12,19 @@ export default class Contact {
         const template = document.createElement("template");
         template.innerHTML = getTemplate(this);
         this.domElt = template.content.firstElementChild;
+        this.initEvents();
         el.append(this.domElt);
+    }
+
+    initEvents() {
+        // .isEditing
+        const btnEdit = this.domElt.querySelector(".btn-edit");
+        const btnDelet = this.domElt.querySelector(".btn-delete");
+
+        btnDelet.addEventListener("click", (e) => {
+            window.ContactList.deleteOneById(this.id);
+            // ici je supprimer du DOM
+            this.domElt.remove();
+        });
     }
 }
