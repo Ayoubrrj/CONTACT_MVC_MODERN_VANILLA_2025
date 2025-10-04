@@ -1,6 +1,7 @@
 import DB from "../../DB";
 import Contact from "../contact/Contact";
 import getTemplate from "./template";
+
 // ceci permet l'import vers le main
 export default class ContactList {
     constructor(data) {
